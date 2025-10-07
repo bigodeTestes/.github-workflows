@@ -1,9 +1,9 @@
-name: Generate Snake Animation
+name: Generate Snake Animation 🐍
 
 on:
   schedule:
-    - cron: "0 0 * * *"  # Atualiza todos os dias à meia-noite
-  workflow_dispatch:     # Permite rodar manualmente
+    - cron: "0 0 * * *"  # Atualiza todo dia à meia-noite (UTC)
+  workflow_dispatch:      # Permite rodar manualmente
   push:
     branches:
       - main
@@ -12,16 +12,20 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout do repositório
+      - name: 📦 Checkout do repositório
         uses: actions/checkout@v3
 
-      - name: Gerar animação da cobrinha
+      - name: 🐍 Gerar animação da cobrinha
         uses: Platane/snk@v3
         with:
           github_user_name: xGuilherme77
           outputs: dist/snake.svg
+          snake_color: "#00ff88"
+          background_color: "#0d1117"  # Fundo escuro
+          color_snake: "#00ff88"
+          color_dots: "#30363d,#30363d,#161b22,#0d1117"
 
-      - name: Publicar no branch output
+      - name: 🚀 Publicar no branch output
         uses: crazy-max/ghaction-github-pages@v3.1.0
         with:
           target_branch: output
